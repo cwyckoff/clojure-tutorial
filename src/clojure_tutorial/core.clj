@@ -1,4 +1,4 @@
-(ns intro.core
+(ns clojure-tutorial.core
   (:require [clojure.pprint :refer [pprint]]))
 
 ;; Hello World in Clojure
