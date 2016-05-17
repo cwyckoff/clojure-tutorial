@@ -52,8 +52,15 @@
 (get-in nested-map [:pianist :address :city])
 (get-in nested-map [:pianist :foo :city] :oops)
 
-;; reversing a sequence
+;; reversing a collection
 (reverse numbers)
+
+;; mapping over a collection
+(def courses [{:title "Functional Programming" :teacher "Martin Odiersky" :online true}
+              {:title "Compilers" :teacher "Alex Aiken" :online true}
+              {:title "CS 101" :teacher "Gerald Sussmann" :online false}])
+
+(map :title courses)
 
 ;; Exercises:
 (def employees {:tech [{:name "joe" :title "developer"}
@@ -64,47 +71,8 @@
                 :marketing [{:name "tommy" :title "account-exec"}
                             {:name "julie" :title "director"}]})
 
-(-> employees :sales keys)
-
-(-> employees :sales first :name)
-
-(:name
- (first
-   (employees :sales)))
-
-(vals employees)
-
-(map :title (:marketing employees))
-
-(def persons [{:name "carol" :age 25 :level "junior" :hours 20}
-              {:name "bob" :age 30 :level "mid-level" :hours 30}
-              {:name "alice" :age 40 :level "senior" :hours 40}
-              {:name "ted" :age 35 :level "senior" :hours 50}
-              {:name "eve" :age 20 :level "foo" :hours 60}])
-
-(defn hourly-wage [p]
-  (let [hours (:hours p)
-        get-wage (fn [p]
-                   (let [exp (:level p)]
-                     (cond
-                       (= exp "senior") 100.00
-                       (= exp "mid-level") 75.00
-                       (= exp "junior") 50.00
-                       :else 0.00)))]
-    (* hours (get-wage p))))
-
-(defn with-raise [w]
-  (+ 25.00 w))
-
-(defn with-money-notation [w]
-  (str "$" w))
-
-;; (calc-hourly-wage (first persons))
-(map (comp with-money-notation with-raise calc-hourly-wage) persons)
-
-
 ;; 1) return the sales team; get the root keys for this map;  get the root vals.
-;; 2) get the name one member of the tech team
+;; 2) get the name of one member of the tech team
 ;; 3) create a person map with the following keys: 'name', 'age', 'experience' (e.g., 'senior', 'mid-level', 'junior'), and 'company'
-;; 4) create a function that takes your person map and calculate :hourly-wage based on experience level; senior people make 100.00 per hour, mid-levels make 75.00 per hour, and juniors make 50.00 per hour
+;; 4) create a function that takes your person map and calculates :hourly-wage based on experience level; senior people make 100.00 per hour, mid-levels make 75.00 per hour, and juniors make 50.00 per hour
 ;; 5) get all the names of the tech team from the employees map above (hint, you'll need to use the #map fn)

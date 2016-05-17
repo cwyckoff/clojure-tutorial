@@ -23,7 +23,8 @@
 (+ x 10)
 
 ;; Declare a variable with local scope
-(let [x 2] (+ x 10))
+(let [x 2]
+  (+ x 10))
 
 ;; Exercises:
 ;; 1) multiply x by 10
